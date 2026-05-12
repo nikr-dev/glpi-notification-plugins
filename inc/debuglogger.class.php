@@ -40,6 +40,18 @@ class PluginMattermostDebugLogger
         }
     }
 
+    /**
+     * Check if debug logging is enabled.
+     * Use this to avoid unnecessary work when debug is off.
+     * 
+     * @return bool True if debug mode is enabled
+     */
+    public static function isEnabled()
+    {
+        self::init();
+        return self::$enabled;
+    }
+
     public static function log($message, $data = null)
     {
         self::init();
