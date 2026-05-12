@@ -21,16 +21,23 @@ class PluginMattermostNotificationEventMattermost extends NotificationEventAbstr
         if (isset($data['users_id'])) {
             $user = new User();
             if ($user->getFromDB($data['users_id'])) {
+                // Fill fields from user profile
                 $data[$field] = $user->fields['mattermost_id'] ?? '';
-                $channelId = $user->fields['mattermost_channel_id'] ?? '';
-                if (!empty($channelId)) {
-                    $data['mattermost_channel_id'] = $channelId;
+                $data['mattermost_channel_id'] = $user->fields['mattermost_channel_id'] ?? '';
+                
+                // If mattermost_id is empty but channel_id is filled,
+                // use channel_id as target field so GLPI doesn't filter out the notification
+                if (empty($data[$field]) && !empty($data['mattermost_channel_id'])) {
+                    $data[$field] = $data['mattermost_channel_id'];
                 }
             }
         }
 
         if (!isset($data[$field])) {
             $data[$field] = '';
+        }
+        if (!isset($data['mattermost_channel_id'])) {
+            $data['mattermost_channel_id'] = '';
         }
 
         return $field;
@@ -68,7 +75,8 @@ class PluginMattermostNotificationEventMattermost extends NotificationEventAbstr
         $hasNotifications = false;
 
         foreach ($data as $index => $notification) {
-            $addresses = self::getAddresses($notification);
+            // Get addresses for this recipient using their users_id
+            $addresses = self::getAddressesForRecipient($notification);
             if (empty($addresses)) {
                 continue;
             }
@@ -79,8 +87,9 @@ class PluginMattermostNotificationEventMattermost extends NotificationEventAbstr
                 PluginMattermostDebugLogger::log("=== BULK NOTIFICATIONS | " . count($data) . " items ===");
             }
 
-            PluginMattermostDebugLogger::log("--- #{$index} ---");
-            PluginMattermostDebugLogger::log("Addresses:", $addresses);
+            PluginMattermostDebugLogger::log("--- Notification #{$index} ---");
+            PluginMattermostDebugLogger::log("Recipient users_id: " . ($notification['users_id'] ?? 'N/A'));
+            PluginMattermostDebugLogger::log("Addresses to send:", $addresses);
 
             $message = '';
             $subject = $notification['name'] ?? $notification['subject'] ?? '';
@@ -116,40 +125,44 @@ class PluginMattermostNotificationEventMattermost extends NotificationEventAbstr
         return $sent;
     }
 
-    private static function getAddresses($notification)
+    /**
+     * Get Mattermost addresses for recipient by their GLPI users_id.
+     * Simply reads mattermost_id and mattermost_channel_id from user profile.
+     * 
+     * @param array $notification Notification data from GLPI
+     * @return array Array of Mattermost addresses
+     */
+    private static function getAddressesForRecipient($notification)
     {
-        global $DB;
         $addresses = [];
 
+        // Get recipient by users_id - this is the GLPI user ID
         if (!empty($notification['users_id'])) {
             $user = new User();
             if ($user->getFromDB($notification['users_id'])) {
-                if (!empty($user->fields['mattermost_id'])) $addresses[] = $user->fields['mattermost_id'];
-                if (!empty($user->fields['mattermost_channel_id'])) $addresses[] = $user->fields['mattermost_channel_id'];
-            }
-        }
-
-        if (empty($addresses)) {
-            if (!empty($notification['mattermost_id'])) {
-                $addresses[] = $notification['mattermost_id'];
-                
-                $iterator = $DB->request([
-                    'FROM'  => 'glpi_users',
-                    'WHERE' => ['mattermost_id' => $notification['mattermost_id']],
-                    'LIMIT' => 1
+                PluginMattermostDebugLogger::log("User found by users_id=" . $notification['users_id'] . ":", [
+                    'id' => $user->fields['id'],
+                    'name' => $user->fields['name'] ?? 'unknown',
+                    'mattermost_id' => $user->fields['mattermost_id'] ?: 'EMPTY',
+                    'mattermost_channel_id' => $user->fields['mattermost_channel_id'] ?: 'EMPTY'
                 ]);
-                if ($row = $iterator->current()) {
-                    $user = new User();
-                    if ($user->getFromDB($row['id'])) {
-                        if (!empty($user->fields['mattermost_channel_id'])) {
-                            $addresses[] = $user->fields['mattermost_channel_id'];
-                        }
-                    }
+
+                // Collect ALL non-empty addresses from user profile
+                if (!empty($user->fields['mattermost_id'])) {
+                    $addresses[] = $user->fields['mattermost_id'];
                 }
+                if (!empty($user->fields['mattermost_channel_id'])) {
+                    $addresses[] = $user->fields['mattermost_channel_id'];
+                }
+
+                if (empty($addresses)) {
+                    PluginMattermostDebugLogger::log("User has no Mattermost addresses configured");
+                }
+            } else {
+                PluginMattermostDebugLogger::log("User not found by users_id=" . $notification['users_id']);
             }
-            if (!empty($notification['mattermost_channel_id'])) {
-                $addresses[] = $notification['mattermost_channel_id'];
-            }
+        } else {
+            PluginMattermostDebugLogger::log("No users_id in notification data");
         }
 
         return array_unique($addresses);
