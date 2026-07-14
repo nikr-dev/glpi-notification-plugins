@@ -5,6 +5,7 @@ Plugin for sending GLPI notifications via Mattermost or Telegram bot. Support se
 
 Writen and tested with GLPI v11.0.8.
 Will not work below 11 version.
+
 Channed ID added to user for GLPI groups logic workaround.
 
 Plugins registers as notification method (along with email, browser), and you must add notification templates with it to your notifications, like you did with emails!
