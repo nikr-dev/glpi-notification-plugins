@@ -1,0 +1,100 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: glpi-mattermost\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "plugin_name"
+msgstr "Mattermost"
+
+msgid "plugin_description"
+msgstr "Отправка уведомлений из GLPI через бота Mattermost"
+
+msgid "config"
+msgstr "Конфигурация Mattermost"
+
+msgid "setup"
+msgstr "Настройка уведомлений Mattermost"
+
+msgid "server_url"
+msgstr "URL сервера"
+
+msgid "bot_token"
+msgstr "Токен бота"
+
+msgid "debug_mode"
+msgstr "Режим отладки"
+
+msgid "log_to_file"
+msgstr "Записывать все уведомления в файл"
+
+msgid "log_file_location"
+msgstr "Путь к файлу журнала:"
+
+msgid "status"
+msgstr "Статус"
+
+msgid "configured_active"
+msgstr "Настроен и активен"
+
+msgid "not_configured"
+msgstr "Не настроен"
+
+msgid "config_saved"
+msgstr "Конфигурация успешно сохранена"
+
+msgid "test_send"
+msgstr "Отправить тестовое уведомление"
+
+msgid "test_sent"
+msgstr "Тест отправлен!"
+
+msgid "test_failed"
+msgstr "Тест не пройден. Проверьте журнал отладки."
+
+msgid "configure_first"
+msgstr "Сначала укажите URL сервера и токен бота."
+
+msgid "no_addresses_configured"
+msgstr "В вашем профиле не указаны адреса Mattermost."
+
+msgid "mattermost_username"
+msgstr "Имя пользователя Mattermost"
+
+msgid "mattermost_channel_id"
+msgstr "ID канала Mattermost"
+
+msgid "dm_hint"
+msgstr "Личные сообщения будут отправляться этому пользователю Mattermost."
+
+msgid "leave_empty"
+msgstr "Оставьте пустым для отключения."
+
+msgid "channel_hint"
+msgstr "Уведомления также будут публиковаться в этом канале."
+
+msgid "enable_followups"
+msgstr "Включить уведомления через Mattermost"
+
+msgid "followups_configuration"
+msgstr "Настройка уведомлений Mattermost"
+
+msgid "notification_mode"
+msgstr "Mattermost"
+
+msgid "test_message"
+msgstr "Тестовое уведомление"
+
+msgid "test_body"
+msgstr "Это тестовое уведомление от GLPI Mattermost плагина.\nЕсли вы видите это сообщение, интеграция работает правильно."
+
+msgid "test_footer"
+msgstr "Отправлено: %s | v%s"

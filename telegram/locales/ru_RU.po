@@ -1,0 +1,109 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: glpi-telegram\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-01 00:00+0000\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Russian\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+msgid "plugin_name"
+msgstr "Telegram"
+
+msgid "plugin_description"
+msgstr "Отправка уведомлений из GLPI через бота Telegram"
+
+msgid "config"
+msgstr "Конфигурация Telegram"
+
+msgid "setup"
+msgstr "Настройка уведомлений Telegram"
+
+msgid "bot_token"
+msgstr "Токен бота"
+
+msgid "bot_token_hint"
+msgstr "Получите токен бота у @BotFather в Telegram"
+
+msgid "debug_mode"
+msgstr "Режим отладки"
+
+msgid "log_to_file"
+msgstr "Записывать все уведомления в файл"
+
+msgid "log_file_location"
+msgstr "Путь к файлу журнала:"
+
+msgid "status"
+msgstr "Статус"
+
+msgid "configured_active"
+msgstr "Настроен и активен"
+
+msgid "not_configured"
+msgstr "Не настроен"
+
+msgid "config_saved"
+msgstr "Конфигурация успешно сохранена"
+
+msgid "test_send"
+msgstr "Отправить тестовое уведомление"
+
+msgid "test_sent"
+msgstr "Тест отправлен!"
+
+msgid "test_failed"
+msgstr "Тест не пройден. Проверьте журнал отладки."
+
+msgid "configure_first"
+msgstr "Сначала укажите токен бота."
+
+msgid "no_addresses_configured"
+msgstr "В вашем профиле не указаны адреса Telegram."
+
+msgid "telegram_user_id"
+msgstr "ID пользователя Telegram"
+
+msgid "telegram_chat_id"
+msgstr "ID чата Telegram"
+
+msgid "telegram_thread_id"
+msgstr "ID темы (топика)"
+
+msgid "dm_hint"
+msgstr "Личные сообщения будут отправляться этому ID пользователя Telegram."
+
+msgid "channel_hint"
+msgstr "Уведомления будут отправляться в этот чат (группа или канал)."
+
+msgid "thread_hint"
+msgstr "ID темы для обсуждений в группе."
+
+msgid "thread_usage_hint"
+msgstr "Используется только если указан ID чата."
+
+msgid "leave_empty"
+msgstr "Оставьте пустым для отключения."
+
+msgid "enable_followups"
+msgstr "Включить уведомления через Telegram"
+
+msgid "followups_configuration"
+msgstr "Настройка уведомлений Telegram"
+
+msgid "notification_mode"
+msgstr "Telegram"
+
+msgid "test_message"
+msgstr "Тестовое уведомление"
+
+msgid "test_body"
+msgstr "Это тестовое уведомление от GLPI Telegram плагина.\nЕсли вы видите это сообщение, интеграция работает правильно."
+
+msgid "test_footer"
+msgstr "Отправлено: %s | v%s"
