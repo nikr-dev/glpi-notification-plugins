@@ -1,12 +1,16 @@
 # GLPI Telegram and Mattermost notification plugins
 Plugin for sending GLPI notifications via Mattermost or Telegram bot. Support sending to user and channel (or both).
 
+
 !WARNING! it's a "vibecode" thing, cooked with DeepSeek. I will fully understand you for shaming me :)
+
 
 Writen and tested with GLPI v11.0.8.
 Will not work below 11 version.
 
+
 Channed ID added to user for GLPI groups logic workaround.
+
 
 Plugins registers as notification method (along with email, browser), and you must add notification templates with it to your notifications, like you did with emails!
 <img width="1091" height="490" alt="изображение" src="https://github.com/user-attachments/assets/99a0a239-f56d-47b9-a81c-b1c40ce0b1cc" />
